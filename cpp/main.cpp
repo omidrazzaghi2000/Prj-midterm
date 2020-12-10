@@ -2,8 +2,7 @@
 #include "board.h"
 
 int main(){
-    Board myBoard{Board()};
+    Board myBoard{Board(false)};
     myBoard.disp();
-    myBoard.getBoardSequenceFromUser();
     return 0;
 }

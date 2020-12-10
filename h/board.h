@@ -9,7 +9,6 @@ class Board{
     public:
         ~Board()=default;
         Board(bool isRandom=true);
-        void getBoardSequenceFromUser();
         void disp();
     private:
         size_t boardSize = 3;
