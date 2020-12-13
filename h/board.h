@@ -9,7 +9,8 @@
        UP,
        DOWN,
        LEFT,
-       RIGHT
+       RIGHT,
+       NOTHING
     };  
 class Board{
     public:

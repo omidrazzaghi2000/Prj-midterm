@@ -3,5 +3,5 @@
 #include <iostream>
 #include <vector>
 #include "board.h"
-void BFSTraverse(Board start , Board goal , int level , Direction formerDirection=Direction::UP);
+void BFSTraverse(Board  start , Board   goal , int level , Direction formerDirection=Direction::NOTHING);
 #endif
