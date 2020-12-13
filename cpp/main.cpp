@@ -1,10 +1,9 @@
 #include <iostream>
 #include "board.h"
-
+#include "traverse.h"
 int main(){
-    Board myBoard{Board()};
-    myBoard.disp();
-    myBoard.moveEmptyTile(Direction::RIGHT);
-    myBoard.disp();
+    Board myBoard{Board(false)};
+    Board goal{Board(false)};
+    BFSTraverse(myBoard,goal,0);
     return 0;
 }

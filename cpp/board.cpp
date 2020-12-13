@@ -79,7 +79,7 @@ void Board::disp(){
         std::cout << std::endl;
     }
 }
-std::vector<int> find_tile_position(Board b,int tileNumber){
+std::vector<int> find_tile_position(Board& b,int tileNumber){
     std::vector<int> position;
     for(size_t i = 0 ; i < b.getTable().size() ; i++){
         for (size_t j = 0 ; j < b.getTable().at(i).size() ; j++){
@@ -96,7 +96,8 @@ std::vector<int> find_tile_position(Board b,int tileNumber){
 bool isThisPositionExist(Board& board,std::vector<int> position){
     return (position.at(0) >= 0 && position.at(1) >= 0) && (position.at(0) <= (int)board.getBoardSize()-1 && position.at(1) <= (int)board.getBoardSize()-1);
 }
-void Board::moveEmptyTile(Direction direction){
+bool Board::moveEmptyTile(Direction direction){
+    bool isSuccess=true;
     std::vector<int> zeroPosition=find_tile_position(*this,0);
     if(zeroPosition.size() == 2){
         std::vector<int> destinationPostion{zeroPosition};
@@ -106,31 +107,36 @@ void Board::moveEmptyTile(Direction direction){
                 if(isThisPositionExist(*this,destinationPostion)){
                     std::swap(Table.at(zeroPosition.at(0)).at(zeroPosition.at(1)),
                               Table.at(destinationPostion.at(0)).at(destinationPostion.at(1)));
-                }else{std::cout << "this movement is not possible :( \n";}
+                }else{
+                isSuccess = false;}
                 break;
             case Direction::DOWN:
                 destinationPostion.at(0) += 1;
                 if(isThisPositionExist(*this,destinationPostion)){
                     std::swap(Table.at(zeroPosition.at(0)).at(zeroPosition.at(1)),
                               Table.at(destinationPostion.at(0)).at(destinationPostion.at(1)));
-                }else{std::cout << "this movement is not possible :( \n";}
+                }else{
+                isSuccess = false;}
                 break;
             case Direction::LEFT:
                 destinationPostion.at(1) -= 1;
                 if(isThisPositionExist(*this,destinationPostion)){
                      std::swap(Table.at(zeroPosition.at(0)).at(zeroPosition.at(1)),
-                              Table.at(destinationPostion.at(0)).at(destinationPostion.at(1)));
-                }else{std::cout << "this movement is not possible :( \n";}
+                               Table.at(destinationPostion.at(0)).at(destinationPostion.at(1)));
+                }else{
+                isSuccess = false;}
                 break;
             case Direction::RIGHT:
                 destinationPostion.at(1) += 1;
                 if(isThisPositionExist(*this,destinationPostion)){
                     std::swap(Table.at(zeroPosition.at(0)).at(zeroPosition.at(1)),
                               Table.at(destinationPostion.at(0)).at(destinationPostion.at(1)));
-                }else{std::cout << "this movement is not possible :( \n";}
+                }else{
+                isSuccess = false;}
                 break;
         }
     }else{
         //[AnErrorOccured] : Zero tile is not in table
     }
+    return isSuccess;
 }
