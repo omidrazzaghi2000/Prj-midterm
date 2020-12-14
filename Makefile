@@ -13,7 +13,7 @@ $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) ./cpp/board.cpp -o ./obj/board.o
 ./obj/traverse.o: ./cpp/traverse.cpp
 	$(CXX) $(CXXFLAGS) ./cpp/traverse.cpp -o ./obj/traverse.o
-./obj/main.o: ./cpp/main.cpp  ./cpp/board.cpp
+./obj/main.o: ./cpp/main.cpp  ./cpp/traverse.cpp 
 	$(CXX) $(CXXFLAGS) ./cpp/main.cpp -o ./obj/main.o
 clean:
 	rm -fv $(TARGET) $(OBJECTS)

@@ -134,6 +134,8 @@ bool Board::moveEmptyTile(Direction direction){
                 }else{
                 isSuccess = false;}
                 break;
+            case Direction::NOTHING:
+                break;
         }
     }else{
         //[AnErrorOccured] : Zero tile is not in table
