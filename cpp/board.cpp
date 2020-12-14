@@ -99,8 +99,6 @@ bool isThisPositionExist(Board& board,std::vector<int> position){
 bool Board::moveEmptyTile(Direction direction){
     bool isSuccess=true;
     std::vector<int> zeroPosition=find_tile_position(*this,0);
-    std::cout << "Before : \n";
-    this->disp(); 
     if(zeroPosition.size() == 2){
         std::vector<int> destinationPostion{zeroPosition};
         switch (direction){
