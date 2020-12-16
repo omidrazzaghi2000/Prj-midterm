@@ -1,62 +1,66 @@
 #include "traverse.h"
 //helper value
 
-void BFSTraverse(Board  start , Board  goal,int level, int numberOflevels , Direction formerDirecrtion ){
-    Board temp = start;
-    static std::vector<Board> solution{};
-
+void DFSTraverse(Board  start , Board  goal , int numberOflevels,int level ,Direction formerDirection ){
+  Board temp = start;
+    
+    static std::vector<Board> solution;
+    static bool finished = false;
     if(level < numberOflevels && start.getTable()!=goal.getTable()){
-        if(formerDirecrtion!=Direction::DOWN && start.moveEmptyTile(Direction::UP)){
+        if(formerDirection!=Direction::DOWN && start.moveEmptyTile(Direction::UP) && !finished){
             // std::cout << "UP\n";
             // std::cout << level << std::endl;
-            // start.disp();
+            start.disp();
             solution.push_back(start);
-            BFSTraverse(start,goal,level+1,numberOflevels,Direction::UP);
+            DFSTraverse(start,goal,numberOflevels,level+1,Direction::UP);
             start = temp;
             
         }
-        if(formerDirecrtion != Direction::UP && start.moveEmptyTile(Direction::DOWN)){
+        if(formerDirection != Direction::UP && start.moveEmptyTile(Direction::DOWN) && !finished){
             // std::cout << "DOWN\n";
             // std::cout << level << std::endl;
-            // start.disp();
+            start.disp();
             solution.push_back(start);
-            BFSTraverse(start,goal,level+1,numberOflevels,Direction::DOWN);
+            DFSTraverse(start,goal,numberOflevels,level+1,Direction::DOWN);
             start = temp;
             
             
         }
-        if(formerDirecrtion != Direction::RIGHT && start.moveEmptyTile(Direction::LEFT)){
+        if(formerDirection != Direction::RIGHT && start.moveEmptyTile(Direction::LEFT) && !finished){
             // std::cout << "LEFT\n";
             // std::cout << level << std::endl;
-            // start.disp();
+            start.disp();
             solution.push_back(start);
-            BFSTraverse(start,goal,level+1,numberOflevels,Direction::LEFT);
+            DFSTraverse(start,goal,numberOflevels,level+1,Direction::LEFT);
             start = temp;
             
         }
-        if(formerDirecrtion != Direction::LEFT && start.moveEmptyTile(Direction::RIGHT)){
+        if(formerDirection != Direction::LEFT && start.moveEmptyTile(Direction::RIGHT) && !finished){
             // std::cout << "RIGHT\n";
             // std::cout << level << std::endl;
-            // start.disp();
+            start.disp();
             solution.push_back(start);
-            BFSTraverse(start,goal,level+1,numberOflevels,Direction::LEFT);
+            DFSTraverse(start,goal,numberOflevels,level+1,Direction::RIGHT);
             start = temp;
         }
+            solution.pop_back();
             // std::cout << "Erase all" << std::endl;
-            solution.erase(solution.begin() , solution.end());
+            // solution.erase(solution.begin() , solution.end());
     }else{
         if(start.getTable()==goal.getTable()){
-            std::cout << "Found it\n";
+            std::cout << "I found it\n";
             // start.disp();
             std::cout << "This is solution" << std::endl;
             for (size_t i {0} ; i < solution.size() ; i++){
-                
                 solution.at(i).disp();
             }
+            finished = true;
+
         }
         if(level >= numberOflevels) {
             // std::cout << " Erase Leaf" << std::endl;
             solution.pop_back();
+            
         }
         
         
@@ -64,6 +68,5 @@ void BFSTraverse(Board  start , Board  goal,int level, int numberOflevels , Dire
 
 }
 
-void DFSTraverse(Board start , Board goal){
-    if(start.moveEmptyTile(Direction::UP));
-}
+
+

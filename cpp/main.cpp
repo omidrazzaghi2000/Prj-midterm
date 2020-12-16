@@ -4,6 +4,6 @@
 int main(){
     Board myBoard{Board(false)};
     Board goal{Board(false)};
-    BFSTraverse(myBoard,goal,0,2);
+    DFSTraverse(myBoard,goal,4);
     return 0;
 }
